@@ -1,0 +1,28 @@
+[project]
+name = "prueba"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "JuanCruzR98", email = "juanmanucruz98@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "aiomysql>=0.3.2",
+    "bcrypt>=5.0.0",
+    "cryptography>=50.0.0",
+    "fastapi[standard]>=0.141.1",
+    "pymysql>=1.2.0",
+    "python-dotenv>=1.2.2",
+    "sqlalchemy>=2.0.51",
+]
+
+[tool.fastapi]
+entrypoint = "src.main:app"
+
+[project.scripts]
+prueba = "src.main:app"
+
+[build-system]
+requires = ["uv_build>=0.12.1,<0.13.0"]
+build-backend = "uv_build"
