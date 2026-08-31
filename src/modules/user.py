@@ -18,6 +18,7 @@ class UserResponse(BaseModel):
     uuid:str
     username:str
     email:str
+    access_token:str
 
     class Config:
         orm_mode = True

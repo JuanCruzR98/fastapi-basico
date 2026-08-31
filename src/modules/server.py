@@ -17,7 +17,7 @@ class Server:
          
     def _middlewares(self):
         self.app.add_middleware(
-            CORSMiddleware,allow_origins=["*"],allow_methods=["*"],allow_headers=["*"]
+            CORSMiddleware,allow_origins=["*","https://7blpkhfj-8000.use.devtunnels.ms","https://www.thunderclient.com"],allow_methods=["*"],allow_headers=["*"]
         )
         self.app.mount("/public",StaticFiles(directory="public"),name="public")
     

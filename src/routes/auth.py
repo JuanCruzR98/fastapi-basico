@@ -1,10 +1,11 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Request
+from fastapi.responses import Response
 from pydantic import BaseModel, EmailStr, conint,constr
 from dotenv import load_dotenv
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.asyncio import AsyncSession
 from modules.user import User,UserResponse
-from controllers.auth import signup, login
+from controllers.auth import renew, signup, login
 from database.config import get_db
 import re
 
@@ -41,6 +42,11 @@ async def sign_in(user:UserSingUpModel,db: Session = Depends(get_db)):
     print(user)
     return await signup(user.email,user.username,user.password,db)
 
-@router.post("/login", response_model=UserResponse)
-async def log_in(user:UserSignModel,db: AsyncSession = Depends(get_db)):
-    return await login(email=user.email,password=user.password,db=db)
+@router.post("/login", response_model=UserResponse,)
+async def log_in(user:UserSignModel,response:Response,db: AsyncSession = Depends(get_db)):
+    return await login(email=user.email,password=user.password,db=db,response=response)
+
+@router.post("/renew")
+async def renew_token(request:Request):
+    print(request.cookies)
+    return await renew(request)
